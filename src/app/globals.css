@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* --------------------------- M3 token bridge ---------------------------- */
+/* Map Google-flavored CSS variables onto Tailwind color utilities. */
+
+@theme inline {
+  --font-sans: var(--font-gs), var(--font-inter), "Google Sans", "Inter", ui-sans-serif,
+    system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-card-3: var(--card-3);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+
+  --color-acc: var(--acc);
+  --color-on-acc: var(--on-acc);
+  --color-acc-soft: var(--acc-soft);
+  --color-acc-ink: var(--acc-ink);
+
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+
+  --color-toast: var(--toast);
+  --color-toast-ink: var(--toast-ink);
+  --color-toast-ac: var(--toast-ac);
+}
+
+/* ------------------------------- light mode ----------------------------- */
+/* Authentic Google web palette (Play Store / Gmail light). */
+
+:root {
+  --bg: #f6f8fc;
+  --card: #ffffff;
+  --card-2: #f1f3f4;
+  --card-3: #e8eaed;
+  --ink: #202124;
+  --ink-soft: #5f6368;
+  --line: #e8eaed;
+
+  --acc: #1a73e8;
+  --on-acc: #ffffff;
+  --acc-soft: #e8f0fe;
+  --acc-ink: #174ea6;
+
+  --green: #188038;
+  --green-soft: #e6f4ea;
+  --red: #d93025;
+  --red-soft: #fce8e6;
+  --gold: #b06000;
+  --gold-soft: #fef7e0;
+
+  --toast: #202124;
+  --toast-ink: #e8eaed;
+  --toast-ac: #8ab4f8;
+
+  color-scheme: light;
+}
+
+/* -------------------------------- dark mode ----------------------------- */
+
+.dark {
+  --bg: #121212;
+  --card: #1f2023;
+  --card-2: #26272b;
+  --card-3: #2e2f33;
+  --ink: #e8eaed;
+  --ink-soft: #9aa0a6;
+  --line: #2d2d2d;
+
+  --acc: #8ab4f8;
+  --on-acc: #082a5c;
+  --acc-soft: #27476e;
+  --acc-ink: #d2e3fc;
+
+  --green: #7bd88f;
+  --green-soft: #1e3a28;
+  --red: #f28b82;
+  --red-soft: #3c2421;
+  --gold: #fdd663;
+  --gold-soft: #3a3113;
+
+  --toast: #26292f;
+  --toast-ink: #e8eaed;
+  --toast-ac: #8ab4f8;
+
+  color-scheme: dark;
+}
+
+/* --------------------------------- base --------------------------------- */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-feature-settings: "cv11", "ss01";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--acc) 25%, transparent);
+}
+
+/* ------------------------------ material bits --------------------------- */
+
+/* Material-style elevation for cards (Google gray shadow) */
+.card-elev {
+  box-shadow:
+    0 1px 2px rgba(60, 64, 67, 0.1),
+    0 1px 3px 1px rgba(60, 64, 67, 0.06);
+}
+.dark .card-elev {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* M3 ripple (injected by useRipple) */
+.m3-ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.14;
+  transform: scale(0);
+  animation: m3-ripple 0.55s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes m3-ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* dialog / sheet / toast entrance */
+.anim-sheet {
+  animation: sheet-in 0.22s cubic-bezier(0.2, 0, 0, 1);
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* horizontal chip scroller without a visible scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* keep native pickers (date input) on-brand */
+input[type="date"] {
+  min-height: 2.75rem;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+/* subtle page scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--ink-soft) 40%, transparent) transparent;
+}
