@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect x="0" y="0" width="512" height="512" rx="112" fill="#ffffff"/>
+  <clipPath id="play-rounded">
+    <path d="M 124 92
+             C 112 85 96 94 96 110
+             L 96 402
+             C 96 418 112 427 124 420
+             L 396 269
+             C 410 261 410 251 396 243
+             Z" />
+  </clipPath>
+  <g clip-path="url(#play-rounded)">
+    <polygon points="96,80 96,432 232,256" fill="#0086F8" />
+    <polygon points="96,80 324,198 232,256" fill="#00D362" />
+    <polygon points="96,432 324,314 232,256" fill="#FF3847" />
+    <polygon points="324,198 416,256 324,314 232,256" fill="#FFBE00" />
+  </g>
+</svg>
